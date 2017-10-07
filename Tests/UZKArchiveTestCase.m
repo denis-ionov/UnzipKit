@@ -12,6 +12,8 @@
 #import "UnzipKitMacros.h"
 
 static NSDateFormatter *testFileInfoDateFormatter;
+os_log_t unzipkit_log;
+BOOL isAtLeast10_13SDK;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundef"
@@ -27,6 +29,12 @@ os_log_t unzipkit_log;
 
 #pragma mark - Setup/Teardown
 
++ (void)initialize {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UZKLogInit();
+    });
+}
 
 - (void)setUp {
     [super setUp];

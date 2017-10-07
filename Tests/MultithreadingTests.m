@@ -10,14 +10,13 @@
 #import <UnzipKit/UnzipKit.h>
 #import "UnzipKitMacros.h"
 
-// These tests use a command line tool to create a large archive
-#if !TARGET_OS_IPHONE
-
 @interface MultithreadingTests : UZKArchiveTestCase
 @end
 
 @implementation MultithreadingTests
 
+
+#if !TARGET_OS_IPHONE
 - (void)testMultithreading {
     UZKArchive *largeArchiveA = [[UZKArchive alloc] initWithURL:[self largeArchive] error:nil];
     UZKArchive *largeArchiveB = [[UZKArchive alloc] initWithURL:[self largeArchive] error:nil];
@@ -186,8 +185,7 @@
         }
     }];
 }
+#endif
 
 
 @end
-
-#endif
