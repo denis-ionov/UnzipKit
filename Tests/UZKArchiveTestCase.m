@@ -231,11 +231,16 @@ os_log_t unzipkit_log;
 
 - (NSURL *)archiveWithFiles:(NSArray *)fileURLs
 {
-    NSString *uniqueString = [[NSProcessInfo processInfo] globallyUniqueString];
-    return [self archiveWithFiles:fileURLs name:uniqueString];
+    return [self archiveWithFiles:fileURLs password:nil];
 }
 
-- (NSURL *)archiveWithFiles:(NSArray *)fileURLs name:(NSString *)name
+- (NSURL *)archiveWithFiles:(NSArray *)fileURLs password:(NSString *)password
+{
+    NSString *uniqueString = [[NSProcessInfo processInfo] globallyUniqueString];
+    return [self archiveWithFiles:fileURLs password:password name:uniqueString];
+}
+
+- (NSURL *)archiveWithFiles:(NSArray *)fileURLs password:(NSString *)password name:(NSString *)name
 {
     NSURL *archiveURL = [[self.tempDirectory URLByAppendingPathComponent:name]
                          URLByAppendingPathExtension:@"zip"];
@@ -260,12 +265,21 @@ os_log_t unzipkit_log;
     
     while (startIndex < filePaths.count) {
         @autoreleasepool {
+            NSMutableArray<NSString*> *zipArgs = [NSMutableArray arrayWithArray:
+                                                  @[@"-j", archiveURL.path]];
+            
+            if (password) {
+                [zipArgs addObjectsFromArray:@[@"-P", password]];
+            }
+            
             NSRange currentRange = NSMakeRange(startIndex, MIN(pathsRemaining, maxFilesPerCall));
             NSArray *pathArrayChunk = [filePaths subarrayWithRange:currentRange];
             
+            [zipArgs addObjectsFromArray:pathArrayChunk];
+            
             NSTask *task = [[NSTask alloc] init];
             task.launchPath = @"/usr/bin/zip";
-            task.arguments = [@[@"-j", archiveURL.path] arrayByAddingObjectsFromArray:pathArrayChunk];
+            task.arguments = zipArgs;
             task.standardOutput = consoleOutputHandle;
             
             UZKLog("Compressing files %lu-%lu of %lu", startIndex + 1, startIndex + pathArrayChunk.count, filePaths.count);
@@ -327,6 +341,7 @@ os_log_t unzipkit_log;
     
     static NSInteger archiveNumber = 1;
     NSURL *largeArchiveURL = [self archiveWithFiles:emptyFiles
+                                           password:nil
                                                name:[NSString stringWithFormat:@"Large Archive %ld", archiveNumber++]];
     return largeArchiveURL;
 }
