@@ -61,7 +61,8 @@ os_log_t unzipkit_log;
                            @"Test File A.txt",
                            @"Test File B.jpg",
                            @"Test File C.m4a",
-                           @"NotAZip-PK-ContentsUnknown"];
+                           @"NotAZip-PK-ContentsUnknown",
+                           @"Modified CRC Archive.zip"];
     
     NSArray *unicodeFiles = @[@"Ⓣest Ⓐrchive.zip",
                               @"Test File Ⓐ.txt",
