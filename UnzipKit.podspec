@@ -13,10 +13,8 @@ Pod::Spec.new do |s|
   s.public_header_files  = "Source/UnzipKit.h",
                            "Source/UZKArchive.h",
                            "Source/UZKFileInfo.h"
-  s.private_header_files = "Source/UZKFileInfo_Private.h",
-                           "Lib/**/*.h"
-  s.source_files         = "Source/**/*.{m,h}",
-                           "Lib/**/*.{c,h}"
+  s.private_header_files = "Source/UZKFileInfo_Private.h"
+  s.source_files         = "Source/**/*.{h,m}"
   s.exclude_files        = 'Resources/**/Info.plist'
   s.resource_bundles = {
       'UnzipKitResources' => ['Resources/**/*']
@@ -27,4 +25,10 @@ Pod::Spec.new do |s|
     test_spec.resources = ['Tests/Test Data']
   end
   s.library = "z"
+
+  s.subspec "minizip-lib" do |ss|
+    ss.private_header_files = "Lib/MiniZip/*.h"
+    ss.source_files = "Lib/MiniZip/*.{h,c}"
+    ss.pod_target_xcconfig = { "OTHER_CFLAGS" => "$(inherited) -Wno-comma -Wno-strict-prototypes" }
+  end
 end
