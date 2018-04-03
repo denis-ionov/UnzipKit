@@ -23,7 +23,8 @@ Pod::Spec.new do |s|
     test_spec.source_files = 'Tests/*.{h,m}'
     test_spec.exclude_files = 'Tests/ExtractFilesTests.m'
     test_spec.resources = ['Tests/Test Data']
-    test_spec.pod_target_xcconfig = { "OTHER_CFLAGS" => "$(inherited) -Wno-unguarded-availability" }
+    test_spec.pod_target_xcconfig = { "OTHER_CFLAGS" => "$(inherited) -Wno-unguarded-availability",
+                                      "TEST_ACTIVITY_MODE" => "disable" }
   end
   s.library = "z"
 
