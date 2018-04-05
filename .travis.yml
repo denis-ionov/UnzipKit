@@ -8,14 +8,11 @@ before_install:
     - pod --version
     - gem install cocoapods --pre
     - pod --version
+    - brew install coreutils
 
 before_script:
     # Make log level less verbose. Temporarily undo if more info is needed
     - sudo log config --mode "level:default"
-
-after_success:
-    - tail -10 ./lintlogs/before_filter.txt || true
-    - tail -10 ./lintlogs/after_filter.txt || true
 
 matrix:
   include:
