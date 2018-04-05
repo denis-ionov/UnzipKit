@@ -13,6 +13,10 @@ before_script:
     # Make log level less verbose. Temporarily undo if more info is needed
     - sudo log config --mode "level:default"
 
+cache:
+  directories:
+    - lintlogs
+
 matrix:
   include:
 #    - stage: Test
