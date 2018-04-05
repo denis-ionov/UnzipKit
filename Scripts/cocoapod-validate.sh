@@ -11,6 +11,7 @@ pod env
 # Using awk to remove logging from output until CocoaPods issue #7577 is implemented and I can use the
 # OS_ACTIVITY_MODE = disable environment variable from the test spec scheme
 mkdir lintlogs
-pod lib lint --verbose | tee lintlogs/before_filter.txt | sed '/xctest\[/d; /^$/d' | tee lintlogs/after_filter.txt
+# Only let run for 5 minutes before killing it myself, so Travis doesn't kill it
+pod lib lint --verbose | tee lintlogs/before_filter.txt | sed '/xctest\[/d; /^$/d' | tee lintlogs/after_filter.txt & sleep 300; kill $!
 
 . Scripts/unset-travis-tag.sh
