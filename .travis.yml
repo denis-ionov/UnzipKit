@@ -17,6 +17,10 @@ cache:
   directories:
     - lintlogs
 
+after_failure:
+    - tail -10 ./lintlogs/before_filter.txt || true
+    - tail -10 ./lintlogs/after_filter.txt || true
+
 matrix:
   include:
 #    - stage: Test
