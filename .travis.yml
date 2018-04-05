@@ -8,7 +8,8 @@ before_install:
     - pod --version
     - gem install cocoapods --pre
     - pod --version
-    - brew install coreutils
+
+install: travis_wait mvn install
 
 before_script:
     # Make log level less verbose. Temporarily undo if more info is needed
