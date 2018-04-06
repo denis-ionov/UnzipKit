@@ -40,7 +40,7 @@ matrix:
 
     - stage: Validate
       env: Name=CocoaPods
-      script: travis_wait 15 ./Scripts/cocoapod-validate.sh
+      script: ./Scripts/cocoapod-validate.sh
 
 #    - stage: Validate
 #      env: Name=Carthage
