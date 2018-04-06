@@ -101,6 +101,9 @@
 
 - (void)testFileDescriptorUsage_WriteIntoArchive
 {
+    XCTAssert(NO, @"Making sure build fails when a test fails");
+    return;
+    
     NSInteger initialFileCount = [self numberOfOpenFileHandles];
     
     NSURL *testArchiveOriginalURL = [self largeArchive];
