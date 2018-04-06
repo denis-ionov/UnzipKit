@@ -9,8 +9,6 @@ before_install:
     - gem install cocoapods --pre
     - pod --version
 
-install: travis_wait mvn install
-
 before_script:
     # Make log level less verbose. Temporarily undo if more info is needed
     - sudo log config --mode "level:default"
@@ -42,7 +40,7 @@ matrix:
 
     - stage: Validate
       env: Name=CocoaPods
-      script: ./Scripts/cocoapod-validate.sh
+      script: travis_wait 15 ./Scripts/cocoapod-validate.sh
 
 #    - stage: Validate
 #      env: Name=Carthage
