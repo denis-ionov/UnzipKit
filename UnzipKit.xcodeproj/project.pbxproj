@@ -837,6 +837,7 @@
 					"-Wno-nullable-to-nonnull-conversion",
 					"-Wno-pointer-arith",
 					"-Wno-cast-qual",
+					"-Wno-undef",
 				);
 			};
 			name = Debug;
