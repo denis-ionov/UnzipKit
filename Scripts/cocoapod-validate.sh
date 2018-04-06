@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -ev
+set -o pipefail
 
 . Scripts/set-travis-tag-to-latest.sh
 
