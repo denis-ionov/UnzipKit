@@ -20,9 +20,7 @@ Pod::Spec.new do |s|
       'UnzipKitResources' => ['Resources/**/*']
   }
   s.test_spec 'Tests' do |test_spec|
-#    test_spec.source_files = 'Tests/*.{h,m}'
-    test_spec.source_files = "Tests/UZKArchiveTestCase.{h,m}",
-                             "Tests/CheckDataTests.{h,m}"
+    test_spec.source_files = 'Tests/*.{h,m}'
     test_spec.exclude_files = 'Tests/ExtractFilesTests.m'
     test_spec.resources = ['Tests/Test Data']
     test_spec.pod_target_xcconfig = { "OTHER_CFLAGS" => "$(inherited) -Wno-unguarded-availability" }
