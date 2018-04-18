@@ -77,9 +77,9 @@ extern BOOL unzipkitIsAtLeast10_13SDK; // Declared in UZKArchive.m
 
 // Only used below
 #define _removeLogFormatTokens(format) [[[@format \
-                                            stringByReplacingOccurrencesOfString:@"{public}" withString:@""] \
-                                            stringByReplacingOccurrencesOfString:@"{time_t}" withString:@""] \
-                                            stringByReplacingOccurrencesOfString:@"{iec-bytes}" withString:@""]
+    stringByReplacingOccurrencesOfString:@"{public}" withString:@""] \
+    stringByReplacingOccurrencesOfString:@"{time_t}" withString:@""] \
+    stringByReplacingOccurrencesOfString:@"{iec-bytes}" withString:@""]
 #define _stringify(a) #a
 #define _nsLogWithoutWarnings(format, ...) \
     _Pragma( _stringify( clang diagnostic push ) ) \
